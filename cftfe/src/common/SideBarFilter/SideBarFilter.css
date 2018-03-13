@@ -1,0 +1,21 @@
+.sidebar_filter .title {
+    padding-left: 20px;
+    color: grey;
+    font-size: 14px;
+}
+
+.sidebar_filter .filter_container .filter_item {
+    height: 40px;
+    line-height: 40px;
+    cursor: pointer;
+    padding-left: 20px;
+    transition: all 0.1s ease-in-out;
+}
+.sidebar_filter .filter_container .filter_item:hover {
+    background: #f4f4f4;
+    color: #53a2e1;
+}
+.sidebar_filter .filter_container .selected {
+    background: #f4f4f4;
+    color: #53a2e1;
+}

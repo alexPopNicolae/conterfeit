@@ -1,0 +1,23 @@
+
+.search_component .container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 10px;
+    display: flex;
+    border-bottom:  1px solid rgb(224, 224, 224);
+    overflow: hidden;
+}
+.search_component .fa.fa-search {
+    color: #53a2e1;
+    transform: rotateZ(90deg);
+    display: inline-block;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.search_component .search_input {         
+    font-size: 16px;
+    border: none;
+    outline: none;
+    width: 80%;
+}

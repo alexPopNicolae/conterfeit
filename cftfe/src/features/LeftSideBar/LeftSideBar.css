@@ -1,0 +1,8 @@
+.left_side_bar {
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left:0;
+    bottom: 0;
+    border-right: 1px solid rgb(224, 224, 224);
+}

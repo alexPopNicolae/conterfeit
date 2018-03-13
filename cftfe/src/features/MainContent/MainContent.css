@@ -1,0 +1,14 @@
+.main_content {
+    position: fixed;
+    left: 250px;
+    top: 0;
+    bottom: 0;
+    right: 0;
+}
+.main_content .container {
+    margin-top: 60px;
+    padding: 30px;
+}
+.main_content .container h1{
+    color: grey;
+}
