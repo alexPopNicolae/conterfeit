@@ -25,3 +25,23 @@
     margin: 0px 5px;
     color: grey;
 }
+.files_table .table_row {
+    display: flex;
+    height: 40px;
+    line-height: 40px;
+    border-bottom: 1px solid #E0E0E0;
+    cursor: pointer;
+
+}
+.files_table .table_row > div:nth-of-type(1) {
+    width: 30%;
+}
+.files_table .table_row > div:nth-of-type(2) {
+    width: 20%;
+}
+.files_table .table_row > div:nth-of-type(3) {
+    width: 20%;
+}
+.files_table .table_row > div:nth-of-type(4) {
+    width: 20%;
+}

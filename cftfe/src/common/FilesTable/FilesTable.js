@@ -1,36 +1,35 @@
 import React from 'react';
+import TableHeader from './TableHeader';
+import TableRow from './TableRow';
 import Icon from 'react-fontawesome';
+import _ from 'lodash';
 import './FilesTable.css';
 
 class FilesTable extends React.Component {
     constructor() {
         super();
+
+        this.state = {
+            rows:[]
+        };
+    }
+
+    componentWillMount() {
+        let rows = _.range(0,30);
+       this.setState({rows});
     }
 
     render() {
+        
+        const rows = this.state.rows;
+
         return (
             <div className="files_table">
-               <div className="table_header">
-                    <div>
-                        <Icon name="file"/>
-                        <span>Name</span>
-                        <Icon name="arrow-up"/> 
-                        <Icon name="chevron-down"/>
-                    </div> 
-                    <div>
-                        <span>Last Accesed</span>
-                        <Icon name="chevron-down"/>
-                    </div>
-                    <div>
-                        <span>Sharing</span>
-                    </div>
-                    <div>
-                        <span>Size</span>
-                        <Icon name="chevron-down"/>
-                    </div>
-               </div>
+               <TableHeader />
                <div className="table_body">
-                <p>Aici vin elementele din tabel</p>
+               {rows.map(()=>{
+                   return <TableRow />;
+               })}
                </div>
             </div>
         );
