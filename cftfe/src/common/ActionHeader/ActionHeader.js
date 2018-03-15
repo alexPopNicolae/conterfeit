@@ -33,7 +33,7 @@ class ActionHeader extends React.Component {
            { isSelected ? 
             <div className="content normal_item">
                 <div className="left_content">
-                <span className="action_item">
+                <span className="action_item" onClick={this.props.openModal}>
                     <Icon name="plus" size="2x"/>
                     <span className="text">New</span>
                 </span>

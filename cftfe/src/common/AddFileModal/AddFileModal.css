@@ -1,0 +1,51 @@
+.add_file_modal {
+    background: rgba(0,0,0,0.4);
+    color: white;
+    position: fixed;
+    top:0;
+    left:0;
+    bottom: 0;
+    right: 0;
+    display: none;
+}
+.add_file_modal.visible {
+    display: block;
+}
+.add_file_modal .modal_container {
+    margin: 100px auto;
+    width:500px;
+    height: 300px;
+    background: white;
+    border-radius: 2px;
+    box-shadow: 0px 0px 20px black;
+    position: relative;
+}
+.add_file_modal .fa {
+    color: #53a2e1;
+    cursor: pointer;
+    margin: 5px;
+}
+.add_file_modal .modal_container .modal_header {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    text-align: right;
+}
+.add_file_modal .modal_container .modal_footer {
+    position: absolute;
+    bottom: 0px;
+    text-align: right;
+    width: 100%;
+}
+.add_file_modal .modal_container .modal_footer button {
+    display: inline-block;
+    margin: 10px;
+    background: #53a2e1; 
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px black;
+}
