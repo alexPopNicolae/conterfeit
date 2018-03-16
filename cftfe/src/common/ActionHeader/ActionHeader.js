@@ -1,6 +1,8 @@
 import React from 'react';
 import './ActionHeader.css';
 import Icon from 'react-fontawesome';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 class ActionHeader extends React.Component {
     constructor() {
@@ -30,7 +32,7 @@ class ActionHeader extends React.Component {
         return (
 
           <div className="action_header">
-           { isSelected ? 
+           { !isSelected ? 
             <div className="content normal_item">
                 <div className="left_content">
                 <span className="action_item" onClick={this.props.openModal}>
@@ -68,7 +70,7 @@ class ActionHeader extends React.Component {
                 <span className="action_item">
                     <span className="text">2 selected</span>
                 </span>
-                <span className="action_item">
+                <span className="action_item" onClick={this.props.clearSelectedFiles}>
                     <Icon name="times" size="2x"/>
                 </span>
                 </div>
@@ -79,4 +81,5 @@ class ActionHeader extends React.Component {
         );
     }
 }
+
 export default ActionHeader;

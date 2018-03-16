@@ -18,6 +18,7 @@
     background: white;
     border-radius: 2px;
     box-shadow: 0px 0px 20px black;
+    animation: fadeInUp 0.2s ease-in;
     position: relative;
 }
 .add_file_modal .fa {
@@ -31,6 +32,22 @@
     top: 0;
     text-align: right;
 }
+
+.add_file_modal .modal_container .modal_content {
+    top: 30px;
+    color: black;
+    text-align: center;
+    line-height: 270px;
+}
+
+.add_file_modal .modal_container .modal_content input {
+    padding: 5px;
+    outline: none;
+    border: none;
+    border-bottom: 2px solid #53a2e1;
+    margin-left: 10px;
+}
+
 .add_file_modal .modal_container .modal_footer {
     position: absolute;
     bottom: 0px;
@@ -48,4 +65,14 @@
     cursor: pointer;
     border-radius: 5px;
     box-shadow: 0px 0px 5px black;
+}
+@keyframes fadeInUp {
+    0% {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }

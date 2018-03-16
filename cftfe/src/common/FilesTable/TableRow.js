@@ -5,16 +5,51 @@ class TableRow extends React.Component {
     constructor() {
         super();
 
-        this.state = {};
+        this.state = {
+            id:null,
+            selected:false
+        };
+
+        this.handleRowClick = this.handleRowClick.bind(this);
+    }
+
+    componentWillMount() {
+        this.setState({
+            id:this.props.id,
+            selected:this.props.selected
+        });
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.setState({
+            selected:nextProps.selected
+        });
+    }
+
+    handleRowClick() {
+        let rowStatus={};
+        rowStatus.id = this.state.id;
+        rowStatus.selected = !this.state.selected;
+        this.props.rowState(rowStatus);   
+        this.setState({
+            selected:!this.state.selected
+        })
     }
 
     render() {
+
+        let rowState = this.state.selected ? 'table_row selected':'table_row';
+
         return (
-            <div className="table_row">
-                <div className="table_cell"><Icon name="folder"/>Folder A</div>
-                <div className="table_cell">Feb 22, 2015</div>
-                <div className="table_cell">Private</div>
-                <div className="table_cell">62.1 MB</div>
+            <div onClick={this.handleRowClick} className={rowState}>
+                <div className="table_cell">
+                {this.state.selected ? <Icon name="check-circle" /> : null}
+                <Icon name="folder"/>
+                {this.props.options.name}
+                </div>
+                <div className="table_cell">{this.props.options.date}</div>
+                <div className="table_cell">{this.props.options.sharing}</div>
+                <div className="table_cell">{this.props.options.size}</div>
             </div>
         );
     }

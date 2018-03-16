@@ -9,12 +9,13 @@ class MainContent extends React.Component {
         super();
 
         this.state={
-            itemSelected:true,
+            itemSelected:false,
             modalVisible:false
         };
 
         this.handleClick = this.handleClick.bind(this);
         this.toggleModal = this.toggleModal.bind(this);
+        this.getItemStatus = this.getItemStatus.bind(this);
     }
 
     handleClick() {
@@ -29,13 +30,26 @@ class MainContent extends React.Component {
         });
     }
 
+    getItemStatus(status) {
+       this.setState({
+           itemSelected:status
+       });
+    }
+
+    clearSelectedFiles() {
+       
+    }
+
     render() {
         return(
             <div className="main_content">
-               <ActionHeader openModal={this.toggleModal} itemSelected={this.state.itemSelected}/>
+               <ActionHeader
+                    openModal={this.toggleModal}
+                    itemSelected={this.state.itemSelected}
+                    clearSelectedFiles={this.clearSelectedFiles} />
                <div className="container">
                 <h1>Files</h1>
-                <FilesTable />
+                <FilesTable itemStatus={this.getItemStatus}/>
                 <AddFileModal closeModal={this.toggleModal} visible={this.state.modalVisible}/>
                </div>
             </div>
