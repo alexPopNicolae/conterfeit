@@ -1,11 +1,12 @@
 .action_header {
     background: #f4f4f4;
-    position: absolute;
+    position: fixed;
     top: 0;
-    left: 1px;
+    left: 251px;
     right: 0;
     height: 53px;
     box-sizing: border-box;
+    z-index: 1;
 }
 .action_header .normal_item {
     position: relative;

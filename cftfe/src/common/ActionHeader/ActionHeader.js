@@ -3,6 +3,7 @@ import './ActionHeader.css';
 import Icon from 'react-fontawesome';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { deselectAllFiles, getDatabaseFiles } from  './../../actions/fileActions';
 
 class ActionHeader extends React.Component {
     constructor() {
@@ -11,6 +12,8 @@ class ActionHeader extends React.Component {
         this.state={
             isItemSelected:false
         };
+
+        this.deselectAllFiles = this.deselectAllFiles.bind(this);
     }
 
 
@@ -26,13 +29,18 @@ class ActionHeader extends React.Component {
         });
     }
 
+    deselectAllFiles() {
+        this.props.deselectAllFile();
+        this.props.getDatabaseFiles();
+    }
+
 
     render() {
         let isSelected = this.state.isItemSelected;
         return (
 
           <div className="action_header">
-           { !isSelected ? 
+           { this.props.fileCount === 0 ? 
             <div className="content normal_item">
                 <div className="left_content">
                 <span className="action_item" onClick={this.props.openModal}>
@@ -68,9 +76,9 @@ class ActionHeader extends React.Component {
                 </div>
                 <div className="right_content">
                 <span className="action_item">
-                    <span className="text">2 selected</span>
+                    <span className="text">{this.props.fileCount} selected</span>
                 </span>
-                <span className="action_item" onClick={this.props.clearSelectedFiles}>
+                <span className="action_item" onClick={this.deselectAllFiles}>
                     <Icon name="times" size="2x"/>
                 </span>
                 </div>
@@ -81,5 +89,16 @@ class ActionHeader extends React.Component {
         );
     }
 }
-
-export default ActionHeader;
+function mapStateToProps(state, ownProps) {
+    return {
+        headerVisible:state.headerVisible,
+        fileCount:state.fileCount
+    };
+}
+function mapDispatchToProps(dispatch) {
+    return {
+        deselectAllFile:()=>dispatch(deselectAllFiles()),
+        getDatabaseFiles:()=>dispatch(getDatabaseFiles())
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(ActionHeader);

@@ -3,6 +3,7 @@ import './MainContent.css';
 import ActionHeader from '../../common/ActionHeader';
 import FilesTable from '../../common/FilesTable';
 import AddFileModal from '../../common/AddFileModal';
+import fileApi from './../../api/mockFileApi';
 
 class MainContent extends React.Component {
     constructor() {

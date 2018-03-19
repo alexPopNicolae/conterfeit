@@ -3,6 +3,7 @@ import Icon from 'react-fontawesome';
 import './AddFileModal.css';
 import { connect } from 'react-redux';
 import  { createFile }  from './../../actions/fileActions';
+import { bindActionCreators } from 'redux';
 
 class AddFileModal extends React.Component {
     constructor() {
@@ -41,12 +42,11 @@ class AddFileModal extends React.Component {
     }
 
     saveEnteredFile() {
-        console.log("Salveaza-mi fisierl cu numele");
-        console.log(this.state.fileName);
-        this.props.dispatch(createFile(this.state.fileName));
+        this.props.createFile(this.state.fileName);
         this.setState({
             fileName:''
         });
+        this.props.closeModal();
     }
 
     render () {
@@ -76,6 +76,10 @@ function mapsStateToProps(state, ownProps) {
         files:state.files
     };
 }
-function mapDispatchToProps() {}
+function mapDispatchToProps(dispatch) {
+    return {
+        createFile:fileName => dispatch(createFile(fileName))
+    }
+}
 
-export default connect(mapsStateToProps)(AddFileModal);
+export default connect(mapsStateToProps, mapDispatchToProps)(AddFileModal);

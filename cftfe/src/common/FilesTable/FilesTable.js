@@ -5,6 +5,8 @@ import Icon from 'react-fontawesome';
 import _ from 'lodash';
 import './FilesTable.css';
 import { connect } from 'react-redux';
+import { getDatabaseFiles } from  './../../actions/fileActions';
+import { upCountSelectedFile, downCountSelectedFile } from './../../actions/fileActions';
 
 class FilesTable extends React.Component {
     constructor() {
@@ -18,30 +20,15 @@ class FilesTable extends React.Component {
     }
 
     handleRowState(state) {
-        let id = state.id;
-        let selected = state.selected;
-        let rows = this.state.rows;
-        rows[id].selected = selected;
-        var result = rows.filter(function(item){
-            if(item.selected==true) return true;
-        });
-        if(result.length !==0) {
-            this.props.itemStatus(true);
-        } else {
-            this.props.itemStatus(false);
-        }
-        this.setState({rows});
+      if(state===true) {
+          this.props.upcountSelectedFile();
+      } else {
+          this.props.downCountSelectedFile();
+      }
     }
 
     componentWillMount() {
-      let elements = _.range(0,30);
-      let rows = elements.map((item, index)=>{
-            let element = {};
-            element.id = index;
-            element.selected = false;
-            return element;
-      });  
-       this.setState({rows});
+        this.props.getDatabaseFiles();
     }
 
     render() {
@@ -71,6 +58,12 @@ function mapStateToProps(state, ownProps) {
     }
 }
 
-function mapDispatchToProps() {}
+function mapDispatchToProps(dispatch) {
+    return {
+        upcountSelectedFile: () => {dispatch(upCountSelectedFile())},
+        downCountSelectedFile:() =>{dispatch(downCountSelectedFile())},
+        getDatabaseFiles:()=>{dispatch(getDatabaseFiles())}
+    }
+}
 
-export default connect(mapStateToProps)(FilesTable);
+export default connect(mapStateToProps,mapDispatchToProps)(FilesTable);
