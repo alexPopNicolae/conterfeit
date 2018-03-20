@@ -307,7 +307,7 @@ class DataBaseFiles {
             }
           ];
 
-          this.sharingTypes = ['Private', 'Public', 'Protected'];
+          this.sharingTypes = ['Public', 'Shared', 'Private'];
           this.months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov','Dec'];
     }
 
