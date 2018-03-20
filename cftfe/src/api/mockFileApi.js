@@ -337,7 +337,7 @@ class DataBaseFiles {
     }
 
     addFile(file) {
-        this.files.push(file);
+        this.files.unshift(file);
     }
 
     getAllFiles() {
