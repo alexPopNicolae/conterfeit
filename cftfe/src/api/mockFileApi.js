@@ -341,7 +341,25 @@ class DataBaseFiles {
     }
 
     getAllFiles() {
-        return this.files;
+        let activeFiles = this.files.filter((file)=>{
+          return file.isDeleted === false;
+        });
+        return activeFiles;
+    }
+    getAllDeletedFiles() {
+      let deletedFiles = this.files.filter((file)=>{
+        return file.isDeleted === true;
+      });
+      return deletedFiles;
+    }
+
+    getAccesedLastDay() {
+        let lastDayAccesed = this.files.filter((file)=>{
+          let date = file.lastAccessedDate;
+          let day = date.split('T')[0].split('-');
+          if(day[0]==='2018' && day[1]==='03' && day[2]==='09') return true;
+        });
+        return lastDayAccesed;
     }
 }
 export default new DataBaseFiles();

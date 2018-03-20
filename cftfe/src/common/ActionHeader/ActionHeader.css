@@ -29,16 +29,19 @@
     text-align: left;
 }
 .action_header .right_content {
+    display: flex;
     width: 50%;
     text-align: right;
+    justify-content:flex-end;
 }
 .action_header .action_item {
-    display: inline-block;
-    line-height: 50px;
+    
     margin-left: 20px;
     display: inline-flex;
     cursor: pointer;
     width: 100px;
+    position: relative;
+    height: 50px;
 }
 
 .action_header .action_item  .fa { 
@@ -47,11 +50,17 @@
 
 }
 .action_header .action_item .text {
-    display: inline-block;
     font-size: 16px;
     margin-left:10px;
+    line-height: 50px;
 }
+
+
 .action_header .fa.fa-chevron-down {
     margin-left: 10px;
     color: rgb(80, 80, 80);
+}
+
+.counting_text {
+    margin-top:2px;
 }

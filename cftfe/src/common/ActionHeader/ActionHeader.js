@@ -3,7 +3,7 @@ import './ActionHeader.css';
 import Icon from 'react-fontawesome';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { deselectAllFiles, getDatabaseFiles } from  './../../actions/fileActions';
+import { deselectAllFiles, getDatabaseFiles, removeAllSelectedFilesFromSelectionList } from  './../../actions/fileActions';
 
 class ActionHeader extends React.Component {
     constructor() {
@@ -32,6 +32,7 @@ class ActionHeader extends React.Component {
     deselectAllFiles() {
         this.props.deselectAllFile();
         this.props.getDatabaseFiles();
+        this.props.removeAllSelectedFilesFromSelectionList();
     }
 
 
@@ -75,12 +76,12 @@ class ActionHeader extends React.Component {
                 </span>
                 </div>
                 <div className="right_content">
-                <span className="action_item">
-                    <span className="text">{this.props.fileCount} selected</span>
-                </span>
-                <span className="action_item" onClick={this.deselectAllFiles}>
+                <div className="action_item count">
+                    <div className="counting_text">{this.props.fileCount} selected</div>
+                </div>
+                <div className="action_item" onClick={this.deselectAllFiles}>
                     <Icon name="times" size="2x"/>
-                </span>
+                </div>
                 </div>
             </div>
            }
@@ -98,7 +99,8 @@ function mapStateToProps(state, ownProps) {
 function mapDispatchToProps(dispatch) {
     return {
         deselectAllFile:()=>dispatch(deselectAllFiles()),
-        getDatabaseFiles:()=>dispatch(getDatabaseFiles())
+        getDatabaseFiles:()=>dispatch(getDatabaseFiles()),
+        removeAllSelectedFilesFromSelectionList:()=>dispatch(removeAllSelectedFilesFromSelectionList())
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ActionHeader);

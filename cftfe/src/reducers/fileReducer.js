@@ -6,13 +6,14 @@ export default function fileReducer(state = [], action) {
             let newState = [...state];
             let fileOptions = {};
             fileOptions.name = action.fileName;
-            fileOptions.size = '62.4M';
+            fileOptions.size = 123456;
             fileOptions.date = '30 Sep 2016';
-            fileOptions.sharing = state.length%2 == 0 ? 'Private':'Public';
+            fileOptions.sharing = 1;
             fileOptions.selected = false;
 
             let fileForDB = {};
-            fileForDB.guid = new Date();  
+            let date = new Date();
+            fileForDB.guid = date.getTime();  
             fileForDB.isDeleted = false;
             fileForDB.sizeBytes = 91038671;
             fileForDB.name = action.fileName; 
@@ -24,9 +25,7 @@ export default function fileReducer(state = [], action) {
             
             return newState;
          case 'GET_DATABASE_FILES':
-            let databaseFiles = [];
             let data = mockApi.getAllFiles();
-
             let dataForRow = data.map((item, index) => {
                   let transformedRow = {};
                   transformedRow.id = item.guid;
@@ -38,8 +37,37 @@ export default function fileReducer(state = [], action) {
                   transformedRow.selected = false;
                   return transformedRow;  
             });
-            
             return dataForRow;
+
+            case 'GET_LAST_DAY_ACCESED_FILES':
+            let lastDayAccesed = mockApi.getAccesedLastDay();
+            let lastDayTransformed = lastDayAccesed.map((item, index) => {
+                let transformedRow = {};
+                transformedRow.id = item.guid;
+                transformedRow.name = item.name;
+                transformedRow.date = mockApi.formatDate(item.lastAccessedDate);
+                transformedRow.sharing = mockApi.getSharingType(item.sharing);
+                transformedRow.size = mockApi.formatFileSize(item.sizeBytes);
+                transformedRow.isDeleted = item.isDeleted;
+                transformedRow.selected = false;
+                return transformedRow;  
+          });
+          return lastDayTransformed;
+
+           case 'GET_RECYCLE_BIN_FILES': 
+            let deletedFiles = mockApi.getAllDeletedFiles();
+            let tranformedFiles = deletedFiles.map((item, index) => {
+                let transformedRow = {};
+                transformedRow.id = item.guid;
+                transformedRow.name = item.name;
+                transformedRow.date = mockApi.formatDate(item.lastAccessedDate);
+                transformedRow.sharing = mockApi.getSharingType(item.sharing);
+                transformedRow.size = mockApi.formatFileSize(item.sizeBytes);
+                transformedRow.isDeleted = item.isDeleted;
+                transformedRow.selected = false;
+                return transformedRow;  
+          });
+            return tranformedFiles;
 
         default: 
             return state;    

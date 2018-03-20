@@ -27,7 +27,8 @@ class TableRow extends React.Component {
     }
 
     handleRowClick() {
-      this.props.rowState(!this.state.selected);
+        
+      this.props.rowState(!this.state.selected, this.props.id);
         this.setState({
             selected:!this.state.selected
         })
@@ -38,7 +39,7 @@ class TableRow extends React.Component {
         let rowState = this.state.selected ? 'table_row selected':'table_row';
 
         return (
-            <div onClick={this.handleRowClick} className={rowState}>
+            <div id={this.props.id} onClick={this.handleRowClick} className={rowState}>
                 <div className="table_cell">
                 {this.state.selected ? <Icon name="check-circle" /> : null}
                 <Icon name="folder"/>

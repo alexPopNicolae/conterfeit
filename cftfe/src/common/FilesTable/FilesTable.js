@@ -6,7 +6,7 @@ import _ from 'lodash';
 import './FilesTable.css';
 import { connect } from 'react-redux';
 import { getDatabaseFiles } from  './../../actions/fileActions';
-import { upCountSelectedFile, downCountSelectedFile } from './../../actions/fileActions';
+import { upCountSelectedFile, downCountSelectedFile, addFileToSelectionList, removeFileFromSelectionList } from './../../actions/fileActions';
 
 class FilesTable extends React.Component {
     constructor() {
@@ -19,12 +19,17 @@ class FilesTable extends React.Component {
         this.handleRowState = this.handleRowState.bind(this);
     }
 
-    handleRowState(state) {
-      if(state===true) {
-          this.props.upcountSelectedFile();
+    handleRowState(state, fileId) {
+
+     if(state===true) {
+         this.props.upcountSelectedFile();
+         this.props.addFileToSelectionList(fileId);
       } else {
           this.props.downCountSelectedFile();
+          this.props.removeFileFromSelectionList(fileId);
       }
+      console.log("Fisierele mele selectate sunt:");
+      console.log(this.props.selectedFiles);
     }
 
     componentWillMount() {
@@ -34,6 +39,11 @@ class FilesTable extends React.Component {
     render() {
         
         const rows = this.props.files;
+        console.log("datele mele sunt: ");
+        console.log(rows);
+        console.log("Fisierele mele selectate din state sunt:");
+        console.log(this.props.selectedFiles);
+
 
         return (
             <div className="files_table">
@@ -54,7 +64,8 @@ class FilesTable extends React.Component {
 
 function mapStateToProps(state, ownProps) {
     return {
-        files:state.files
+        files:state.files,
+        selectedFiles:state.selectedFiles
     }
 }
 
@@ -62,7 +73,9 @@ function mapDispatchToProps(dispatch) {
     return {
         upcountSelectedFile: () => {dispatch(upCountSelectedFile())},
         downCountSelectedFile:() =>{dispatch(downCountSelectedFile())},
-        getDatabaseFiles:()=>{dispatch(getDatabaseFiles())}
+        getDatabaseFiles:()=>{dispatch(getDatabaseFiles())},
+        addFileToSelectionList:(fileId)=>{dispatch(addFileToSelectionList(fileId))},
+        removeFileFromSelectionList:(fileId)=>{dispatch(removeFileFromSelectionList(fileId))}
     }
 }
 

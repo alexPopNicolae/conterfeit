@@ -2,7 +2,7 @@ import React from 'react';
 import Icon from 'react-fontawesome';
 import './AddFileModal.css';
 import { connect } from 'react-redux';
-import  { createFile }  from './../../actions/fileActions';
+import  { createFile, getDatabaseFiles }  from './../../actions/fileActions';
 import { bindActionCreators } from 'redux';
 
 class AddFileModal extends React.Component {
@@ -47,6 +47,7 @@ class AddFileModal extends React.Component {
             fileName:''
         });
         this.props.closeModal();
+        this.props.getDatabaseFiles();
     }
 
     render () {
@@ -78,7 +79,8 @@ function mapsStateToProps(state, ownProps) {
 }
 function mapDispatchToProps(dispatch) {
     return {
-        createFile:fileName => dispatch(createFile(fileName))
+        createFile:fileName => dispatch(createFile(fileName)),
+        getDatabaseFiles:()=>{dispatch(getDatabaseFiles())}
     }
 }
 

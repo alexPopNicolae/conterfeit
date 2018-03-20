@@ -27,6 +27,11 @@
     cursor: pointer;
     margin: 5px;
 }
+
+.add_file_modal .fa.fa-window-close {
+    text-shadow: 0px 0px 1px black;
+}
+
 .add_file_modal .modal_container .modal_header {
     position: absolute;
     width: 100%;
