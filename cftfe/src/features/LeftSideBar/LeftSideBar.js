@@ -7,11 +7,18 @@ import SideBarFilter from '../../common/SideBarFilter';
 class LeftSideBar extends React.Component {
     constructor() {
         super();
+
+        this.handleKeyWord = this.handleKeyWord.bind(this);
     }
+
+    handleKeyWord(keyword) {
+        console.log(keyword);
+    }
+
     render() {
         return(
             <div className="left_side_bar">
-              <SearchComponent />
+              <SearchComponent handleChange={this.handleKeyWord}/>
               <SideBarFilter />
             </div>
         );

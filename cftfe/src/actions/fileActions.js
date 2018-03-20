@@ -34,3 +34,6 @@ export function removeFileFromSelectionList(fileId) {
 export function removeAllSelectedFilesFromSelectionList() {
     return {type:'REMOVE_ALL_SELECTED_FILES_FROM_SELECTION_LIST'};
 }
+export function sortFilesBasedOnKeyWord(keyword) {
+    return {type:'SORT_FILES_BASED_ON_KEYWORD', keyword:keyword};
+}

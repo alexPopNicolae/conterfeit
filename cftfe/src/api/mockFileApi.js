@@ -361,5 +361,13 @@ class DataBaseFiles {
         });
         return lastDayAccesed;
     }
+
+    getFilesBasedOnKeyWord(keyword) {
+      let stringFiles = this.files.filter((file)=>{
+          let name = file.name;
+          if(name.indexOf(keyword) !== -1) return true;         
+      });
+      return stringFiles;
+    }
 }
 export default new DataBaseFiles();

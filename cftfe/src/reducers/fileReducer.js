@@ -37,6 +37,9 @@ export default function fileReducer(state = [], action) {
                   transformedRow.selected = false;
                   return transformedRow;  
             });
+
+            mockApi.getFilesBasedOnKeyWord('test');
+
             return dataForRow;
 
             case 'GET_LAST_DAY_ACCESED_FILES':
@@ -68,6 +71,21 @@ export default function fileReducer(state = [], action) {
                 return transformedRow;  
           });
             return tranformedFiles;
+
+        case 'SORT_FILES_BASED_ON_KEYWORD':
+            let keyWordFiles = mockApi.getFilesBasedOnKeyWord(action.keyword);
+            let keyTranformedFiles = keyWordFiles.map((item, index) => {
+                let transformedRow = {};
+                transformedRow.id = item.guid;
+                transformedRow.name = item.name;
+                transformedRow.date = mockApi.formatDate(item.lastAccessedDate);
+                transformedRow.sharing = mockApi.getSharingType(item.sharing);
+                transformedRow.size = mockApi.formatFileSize(item.sizeBytes);
+                transformedRow.isDeleted = item.isDeleted;
+                transformedRow.selected = false;
+                return transformedRow;  
+          });
+            return keyTranformedFiles;
 
         default: 
             return state;    
