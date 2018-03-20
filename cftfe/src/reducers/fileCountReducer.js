@@ -7,7 +7,6 @@ export default function fileCountReducer(state = 0, action) {
             state=state-1;
             return state;
         case 'DESELECT_ALL_FILES':
-            console.log("Deseleacteaza-mi toate fisierele");
             state = 0;
             return state;    
         default: 

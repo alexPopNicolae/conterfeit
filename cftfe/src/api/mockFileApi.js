@@ -365,7 +365,7 @@ class DataBaseFiles {
     getFilesBasedOnKeyWord(keyword) {
       let stringFiles = this.files.filter((file)=>{
           let name = file.name;
-          if(name.indexOf(keyword) !== -1) return true;         
+          if(name.indexOf(keyword) !== -1 && file.isDeleted===false) return true;         
       });
       return stringFiles;
     }

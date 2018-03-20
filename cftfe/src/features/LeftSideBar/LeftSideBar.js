@@ -2,6 +2,8 @@ import React from 'react';
 import './LeftSideBar.css';
 import SearchComponent from '../../common/SearchComponent';
 import SideBarFilter from '../../common/SideBarFilter';
+import { connect } from 'react-redux';
+import { sortFilesBasedOnKeyWord } from  './../../actions/fileActions';
 
 
 class LeftSideBar extends React.Component {
@@ -12,7 +14,7 @@ class LeftSideBar extends React.Component {
     }
 
     handleKeyWord(keyword) {
-        console.log(keyword);
+        this.props.sortFilesBasedOnKeyWord(keyword);
     }
 
     render() {
@@ -24,4 +26,14 @@ class LeftSideBar extends React.Component {
         );
     }
 }
-export default LeftSideBar;
+
+function mapStateToProps(state, ownProps) {
+    return {};
+}
+function mapDispatchToProps(dispatch) {
+    return {
+        sortFilesBasedOnKeyWord:(keyword)=>{dispatch(sortFilesBasedOnKeyWord(keyword))}
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LeftSideBar);
