@@ -1,0 +1,18 @@
+.share_options_container {
+    position: absolute;
+    top: 55px;
+    left:0;
+    right: 0;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px black;
+    background: white;
+    overflow: hidden;
+}
+.share_options_container .option {
+    text-align: center;
+    transition: all 0.2s ease-in-out;
+}
+.share_options_container .option:hover {
+    background: #53A2E1;
+    color: white;
+}

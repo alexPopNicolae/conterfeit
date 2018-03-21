@@ -1,6 +1,7 @@
 import React from 'react';
 import './ActionHeader.css';
 import Icon from 'react-fontawesome';
+import ShareComponent from './../ShareComponent';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { deselectAllFiles,
@@ -21,6 +22,7 @@ class ActionHeader extends React.Component {
         this.deselectAllFiles = this.deselectAllFiles.bind(this);
         this.deleteSelectedFiles = this.deleteSelectedFiles.bind(this);
         this.restoreSelectedFiles = this.restoreSelectedFiles.bind(this);
+        this.handleSelectedShareOption = this.handleSelectedShareOption.bind(this);
     }
 
 
@@ -52,6 +54,10 @@ class ActionHeader extends React.Component {
         this.props.restoreSelectedFiles(this.props.selectedFiles);
         this.props.removeAllSelectedFilesFromSelectionList();
         this.props.getStateActiveFile();
+    }
+
+    handleSelectedShareOption(option) {
+        console.log("Ai ales optiunea: " + option);
     }
 
 
@@ -88,10 +94,7 @@ class ActionHeader extends React.Component {
                 {this.props.fileCount != 0 && deleteVisible ?
                     <div className="content normal_item">
                         <div className="left_content">
-                            <span className="action_item">
-                                <Icon name="share-square" size="2x" />
-                                <span className="text">Share</span>
-                            </span>
+                            <ShareComponent handleSelectedOption={this.handleSelectedShareOption}/>
                             <span title="Delete Selected files" className="action_item" onClick={this.deleteSelectedFiles}>
                                 <Icon name="trash" size="2x" />
                                 <span className="text">Delete</span>
@@ -110,10 +113,7 @@ class ActionHeader extends React.Component {
                 {this.props.fileCount != 0 && restoreVisible ? 
                 <div className="content normal_item">
                 <div className="left_content">
-                    <span className="action_item">
-                        <Icon name="share-square" size="2x" />
-                        <span className="text">Share</span>
-                    </span>
+                    <ShareComponent handleSelectedOption={this.handleSelectedShareOption}/>
                     <span title="Restore selected files" className="action_item" onClick={this.restoreSelectedFiles}>
                         <Icon name="undo" size="2x" />
                         <span className="text">Restore</span>
