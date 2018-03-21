@@ -36,6 +36,8 @@ class FilesTable extends React.Component {
 
     render() {
         const rows = this.props.files;
+        console.log("Asa arata datele mele:");
+        console.log(rows);
         return (
             <div className="files_table">
                <TableHeader />

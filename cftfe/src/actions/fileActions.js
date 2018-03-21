@@ -4,6 +4,9 @@ export function createFile(fileName) {
 export function getDatabaseFiles() {
     return {type:'GET_DATABASE_FILES'};
 }
+export function getStateActiveFile() {
+    return {type:'GET_STATE_ACTIVE_FILES'};
+}
 export function getRecycleBinFiles() {
     return {type:'GET_RECYCLE_BIN_FILES'};
 }

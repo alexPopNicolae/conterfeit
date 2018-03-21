@@ -37,10 +37,11 @@ export default function fileReducer(state = [], action) {
                   transformedRow.selected = false;
                   return transformedRow;  
             });
-
-            mockApi.getFilesBasedOnKeyWord('test');
-
             return dataForRow;
+
+            case 'GET_STATE_ACTIVE_FILES':
+                let sameStateUnselected = state.map((item)=>{return item});
+                return sameStateUnselected;
 
             case 'GET_LAST_DAY_ACCESED_FILES':
             let lastDayAccesed = mockApi.getAccesedLastDay();

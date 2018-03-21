@@ -3,7 +3,7 @@ import './ActionHeader.css';
 import Icon from 'react-fontawesome';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { deselectAllFiles, getDatabaseFiles, removeAllSelectedFilesFromSelectionList } from  './../../actions/fileActions';
+import { deselectAllFiles, getDatabaseFiles, removeAllSelectedFilesFromSelectionList, getStateActiveFile } from  './../../actions/fileActions';
 
 class ActionHeader extends React.Component {
     constructor() {
@@ -31,7 +31,7 @@ class ActionHeader extends React.Component {
 
     deselectAllFiles() {
         this.props.deselectAllFile();
-        this.props.getDatabaseFiles();
+        this.props.getStateActiveFile();
         this.props.removeAllSelectedFilesFromSelectionList();
     }
 
@@ -99,7 +99,7 @@ function mapStateToProps(state, ownProps) {
 function mapDispatchToProps(dispatch) {
     return {
         deselectAllFile:()=>dispatch(deselectAllFiles()),
-        getDatabaseFiles:()=>dispatch(getDatabaseFiles()),
+        getStateActiveFile:()=>dispatch(getStateActiveFile()),
         removeAllSelectedFilesFromSelectionList:()=>dispatch(removeAllSelectedFilesFromSelectionList())
     }
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import $ from 'jquery';
 import './SideBarFilter.css';
 import { connect } from 'react-redux';
-import { getDatabaseFiles, getRecycleBinFiles, getLastDayAccessedFiles } from './../../actions/fileActions';
+import { getDatabaseFiles, getRecycleBinFiles, getLastDayAccessedFiles, deselectAllFiles } from './../../actions/fileActions';
 import mockFileApi from '../../api/mockFileApi';
 
 class SideBarFilter extends React.Component {
@@ -22,6 +22,7 @@ class SideBarFilter extends React.Component {
     addSelectedClassToElement(e) {
         $('.filter_item').removeClass('selected');
         $("#" + e.target.id).addClass('selected');
+        this.props.deselectAllFiles();
         switch(e.target.id) {
             case 'allItem': 
                 this.props.getDatabaseFiles();
@@ -56,7 +57,8 @@ function mapDispatchToProps(dispatch) {
     return {
         getDatabaseFiles:()=>{dispatch(getDatabaseFiles())},
         getRecycleBinFiles:()=>{dispatch(getRecycleBinFiles())},
-        getLastDayAccessedFiles:()=>{dispatch(getLastDayAccessedFiles())}
+        getLastDayAccessedFiles:()=>{dispatch(getLastDayAccessedFiles())},
+        deselectAllFiles:()=>{dispatch(deselectAllFiles())}
     };
 }
 export default connect(mapStateToProps, mapDispatchToProps)(SideBarFilter);
