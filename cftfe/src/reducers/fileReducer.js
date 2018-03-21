@@ -52,6 +52,10 @@ export default function fileReducer(state = [], action) {
           });
           return transformedFilesWithoutRestored;
 
+        case 'CHANGE_SHARING_OPTION':
+            let filesAfterShare = mockApi.changeSharingOption(action.option, action.files);  
+            return state;
+
          case 'GET_DATABASE_FILES':
             let data = mockApi.getAllFiles();
             let dataForRow = data.map((item, index) => {

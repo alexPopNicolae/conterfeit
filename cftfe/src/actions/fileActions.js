@@ -46,3 +46,6 @@ export function deleteSelectedFiles(selectedFiles) {
 export function restoreSelectedFiles(selectedFiles) {
     return {type:'RESTORE_SELECTED_FILES', files:selectedFiles};
 }
+export function changeSharingOption(option, selectedFiles) {
+    return {type:'CHANGE_SHARING_OPTION', option:option, files:selectedFiles};
+}
