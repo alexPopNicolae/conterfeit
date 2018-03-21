@@ -2,7 +2,7 @@ import React from 'react';
 import $ from 'jquery';
 import './SideBarFilter.css';
 import { connect } from 'react-redux';
-import { getDatabaseFiles, getRecycleBinFiles, getLastDayAccessedFiles, deselectAllFiles } from './../../actions/fileActions';
+import { getDatabaseFiles, getRecycleBinFiles, getLastDayAccessedFiles, deselectAllFiles, getHeaderWithDeleteAbility, getHeaderWithRestoreAbility } from './../../actions/fileActions';
 import mockFileApi from '../../api/mockFileApi';
 
 class SideBarFilter extends React.Component {
@@ -26,12 +26,15 @@ class SideBarFilter extends React.Component {
         switch(e.target.id) {
             case 'allItem': 
                 this.props.getDatabaseFiles();
+                this.props.getHeaderWithDeleteAbility();
                 return;
             case 'lastDay':
                this.props.getLastDayAccessedFiles();
+               this.props.getHeaderWithDeleteAbility();
                 return;
             case 'recicleBin':
                 this.props.getRecycleBinFiles();
+                this.props.getHeaderWithRestoreAbility();
                 return;
             default:
                 return;    
@@ -58,7 +61,10 @@ function mapDispatchToProps(dispatch) {
         getDatabaseFiles:()=>{dispatch(getDatabaseFiles())},
         getRecycleBinFiles:()=>{dispatch(getRecycleBinFiles())},
         getLastDayAccessedFiles:()=>{dispatch(getLastDayAccessedFiles())},
-        deselectAllFiles:()=>{dispatch(deselectAllFiles())}
+        deselectAllFiles:()=>{dispatch(deselectAllFiles())},
+        getHeaderWithDeleteAbility:()=>{dispatch(getHeaderWithDeleteAbility())},
+        getHeaderWithRestoreAbility:()=>{dispatch(getHeaderWithRestoreAbility())}
+
     };
 }
 export default connect(mapStateToProps, mapDispatchToProps)(SideBarFilter);

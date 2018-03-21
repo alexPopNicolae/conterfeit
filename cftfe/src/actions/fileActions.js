@@ -22,11 +22,11 @@ export function downCountSelectedFile() {
 export function deselectAllFiles() {
     return {type:'DESELECT_ALL_FILES'};
 }
-export function showFilesOperationsHeader() {
-    return {type:'SHOW_FILE_OPERATIONS_HEADER'};
+export function getHeaderWithDeleteAbility() {//aici trebuie sa lucrez
+    return {type:'GET_HEADER_WITH_DELETE_ABILITY'};
 }
-export function hideFilesOperationHeader() {
-    return {type:'HIDE_FILE_OPERATIONS_HEADER'};
+export function getHeaderWithRestoreAbility() {//aici trebuie sa lucrez
+    return {type:'GET_HEADER_WITH_RESTORE_ABILITY'};
 }
 export function addFileToSelectionList(fileId) {
     return {type:'ADD_FILE_TO_SELECTION_LIST', fileId:fileId};

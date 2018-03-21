@@ -1,11 +1,17 @@
-export default function headerVisibileReducer(state=true, action) {
+const initialState = {deleteVisible:true, restoreVisible:false};
+
+export default function headerVisibileReducer(state=initialState, action) {
     switch(action.type) {
-        case 'SHOW_FILE_OPERATIONS_HEADER':
-            state = true;
-            return state;
-        case 'HIDE_FILE_OPERATIONS_HEADER':
-            state=false;
-            return state;
+        case 'GET_HEADER_WITH_DELETE_ABILITY':
+            return  Object.assign({}, state, {
+                deleteVisible: true,
+                restoreVisible:false
+              })
+        case 'GET_HEADER_WITH_RESTORE_ABILITY':
+            return  Object.assign({}, state, {
+                deleteVisible: false,
+                restoreVisible:true
+            })
         default:
             return state;    
     }

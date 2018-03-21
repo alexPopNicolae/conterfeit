@@ -38,10 +38,19 @@ export default function fileReducer(state = [], action) {
           return transformetFileWithoutDeletes;
 
         case 'RESTORE_SELECTED_FILES':
-            console.log("Fa restore la fisierele selectate in reducer");
-            console.log(action.files);
-            mockApi.restoreSelectedFiles(action.files);
-            return state;
+            let filesWithoutRestored = mockApi.restoreSelectedFiles(action.files);
+            let transformedFilesWithoutRestored = filesWithoutRestored.map((item, index) => {
+                let transformedRow = {};
+                transformedRow.id = item.guid;
+                transformedRow.name = item.name;
+                transformedRow.date = mockApi.formatDate(item.lastAccessedDate);
+                transformedRow.sharing = mockApi.getSharingType(item.sharing);
+                transformedRow.size = mockApi.formatFileSize(item.sizeBytes);
+                transformedRow.isDeleted = item.isDeleted;
+                transformedRow.selected = false;
+                return transformedRow;  
+          });
+          return transformedFilesWithoutRestored;
 
          case 'GET_DATABASE_FILES':
             let data = mockApi.getAllFiles();

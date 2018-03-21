@@ -375,10 +375,16 @@ class DataBaseFiles {
 
     }
 
-    restoreSelectedFiles(files) {
-      console.log("Suntem pe backend");
-      console.log("Vrem sa facem restore la urmatoarele fisiere: ");
-      console.log(files);
+    restoreSelectedFiles(filesId) {
+      for(let i=0;i<filesId.length;i++) {
+        for (let j=0;j<this.files.length;j++) {
+          if(this.files[j].guid === filesId[i]) {
+            this.files[j].isDeleted = false;
+          }
+        }
+      }
+      let visibleFiles = this.getAllDeletedFiles();   
+      return visibleFiles;
     }
 
     getFilesBasedOnKeyWord(keyword) {
