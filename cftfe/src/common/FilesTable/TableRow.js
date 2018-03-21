@@ -27,7 +27,7 @@ class TableRow extends React.Component {
     }
 
     handleRowClick() {
-        
+      console.log("Ai dat click pe un rand!!");  
       this.props.rowState(!this.state.selected, this.props.id);
         this.setState({
             selected:!this.state.selected

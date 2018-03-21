@@ -25,11 +25,9 @@ class FilesTable extends React.Component {
          this.props.upcountSelectedFile();
          this.props.addFileToSelectionList(fileId);
       } else {
-          this.props.downCountSelectedFile();
-          this.props.removeFileFromSelectionList(fileId);
+         this.props.downCountSelectedFile();
+         this.props.removeFileFromSelectionList(fileId);
       }
-      console.log("Fisierele mele selectate sunt:");
-      console.log(this.props.selectedFiles);
     }
 
     componentWillMount() {
@@ -37,14 +35,7 @@ class FilesTable extends React.Component {
     }
 
     render() {
-        
         const rows = this.props.files;
-        console.log("datele mele sunt: ");
-        console.log(rows);
-        console.log("Fisierele mele selectate din state sunt:");
-        console.log(this.props.selectedFiles);
-
-
         return (
             <div className="files_table">
                <TableHeader />
@@ -64,8 +55,7 @@ class FilesTable extends React.Component {
 
 function mapStateToProps(state, ownProps) {
     return {
-        files:state.files,
-        selectedFiles:state.selectedFiles
+        files:state.files
     }
 }
 
