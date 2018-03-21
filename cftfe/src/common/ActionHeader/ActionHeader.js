@@ -3,7 +3,7 @@ import './ActionHeader.css';
 import Icon from 'react-fontawesome';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { deselectAllFiles, getDatabaseFiles, removeAllSelectedFilesFromSelectionList, getStateActiveFile } from  './../../actions/fileActions';
+import { deselectAllFiles, getDatabaseFiles, removeAllSelectedFilesFromSelectionList, getStateActiveFile, deleteSelectedFiles } from  './../../actions/fileActions';
 
 class ActionHeader extends React.Component {
     constructor() {
@@ -14,6 +14,7 @@ class ActionHeader extends React.Component {
         };
 
         this.deselectAllFiles = this.deselectAllFiles.bind(this);
+        this.deleteSelectedFiles = this.deleteSelectedFiles.bind(this);
     }
 
 
@@ -33,6 +34,11 @@ class ActionHeader extends React.Component {
         this.props.deselectAllFile();
         this.props.getStateActiveFile();
         this.props.removeAllSelectedFilesFromSelectionList();
+    }
+
+    deleteSelectedFiles() {
+        this.props.deleteSelectedFiles(this.props.selectedFiles);
+        this.props.getStateActiveFile();
     }
 
 
@@ -70,7 +76,7 @@ class ActionHeader extends React.Component {
                     <Icon name="share-square" size="2x"/>
                     <span className="text">Share</span>
                 </span>
-                <span className="action_item">
+                <span className="action_item" onClick={this.deleteSelectedFiles}>
                     <Icon name="trash" size="2x"/>
                     <span className="text">Delete</span>
                 </span>
@@ -93,14 +99,16 @@ class ActionHeader extends React.Component {
 function mapStateToProps(state, ownProps) {
     return {
         headerVisible:state.headerVisible,
-        fileCount:state.fileCount
+        fileCount:state.fileCount,
+        selectedFiles:state.selectedFiles
     };
 }
 function mapDispatchToProps(dispatch) {
     return {
         deselectAllFile:()=>dispatch(deselectAllFiles()),
         getStateActiveFile:()=>dispatch(getStateActiveFile()),
-        removeAllSelectedFilesFromSelectionList:()=>dispatch(removeAllSelectedFilesFromSelectionList())
+        removeAllSelectedFilesFromSelectionList:()=>dispatch(removeAllSelectedFilesFromSelectionList()),
+        deleteSelectedFiles:(files)=>dispatch(deleteSelectedFiles(files))
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ActionHeader);

@@ -20,10 +20,29 @@ export default function fileReducer(state = [], action) {
             fileForDB.sharing = 2;
             fileForDB.lastAccessedDate = "2018-03-09T03:27:50 -02:00";
             mockApi.addFile(fileForDB);
-
             newState.unshift(fileOptions);
-            
             return newState;
+        case 'DELETE_SELECTED_FILES':
+            let filesWithoutDeleted = mockApi.deleteSelectedFiles(action.files);
+            let transformetFileWithoutDeletes = filesWithoutDeleted.map((item, index) => {
+                let transformedRow = {};
+                transformedRow.id = item.guid;
+                transformedRow.name = item.name;
+                transformedRow.date = mockApi.formatDate(item.lastAccessedDate);
+                transformedRow.sharing = mockApi.getSharingType(item.sharing);
+                transformedRow.size = mockApi.formatFileSize(item.sizeBytes);
+                transformedRow.isDeleted = item.isDeleted;
+                transformedRow.selected = false;
+                return transformedRow;  
+          });
+          return transformetFileWithoutDeletes;
+
+        case 'RESTORE_SELECTED_FILES':
+            console.log("Fa restore la fisierele selectate in reducer");
+            console.log(action.files);
+            mockApi.restoreSelectedFiles(action.files);
+            return state;
+
          case 'GET_DATABASE_FILES':
             let data = mockApi.getAllFiles();
             let dataForRow = data.map((item, index) => {

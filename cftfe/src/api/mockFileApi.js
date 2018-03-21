@@ -362,6 +362,25 @@ class DataBaseFiles {
         return lastDayAccesed;
     }
 
+    deleteSelectedFiles(filesId) {
+      for(let i=0;i<filesId.length;i++) {
+        for (let j=0;j<this.files.length;j++) {
+          if(this.files[j].guid === filesId[i]) {
+            this.files[j].isDeleted = true;
+          }
+        }
+      }
+      let visibleFiles = this.getAllFiles();   
+      return visibleFiles;
+
+    }
+
+    restoreSelectedFiles(files) {
+      console.log("Suntem pe backend");
+      console.log("Vrem sa facem restore la urmatoarele fisiere: ");
+      console.log(files);
+    }
+
     getFilesBasedOnKeyWord(keyword) {
       let stringFiles = this.files.filter((file)=>{
           let name = file.name;

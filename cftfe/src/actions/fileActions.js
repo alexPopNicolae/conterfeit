@@ -40,3 +40,9 @@ export function removeAllSelectedFilesFromSelectionList() {
 export function sortFilesBasedOnKeyWord(keyword) {
     return {type:'SORT_FILES_BASED_ON_KEYWORD', keyword:keyword};
 }
+export function deleteSelectedFiles(selectedFiles) {
+    return {type:'DELETE_SELECTED_FILES', files:selectedFiles};
+}
+export function restoreSelectedFiles(selectedFiles) {
+    return {type:'RESTORE_SELECTED_FILES', files:selectedFiles};
+}
