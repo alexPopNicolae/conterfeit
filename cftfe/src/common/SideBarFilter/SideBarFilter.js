@@ -2,7 +2,14 @@ import React from 'react';
 import $ from 'jquery';
 import './SideBarFilter.css';
 import { connect } from 'react-redux';
-import { getDatabaseFiles, getRecycleBinFiles, getLastDayAccessedFiles, deselectAllFiles, getHeaderWithDeleteAbility, getHeaderWithRestoreAbility } from './../../actions/fileActions';
+import { getDatabaseFiles,
+        getRecycleBinFiles, 
+        getLastDayAccessedFiles, 
+        deselectAllFiles, 
+        getHeaderWithDeleteAbility, 
+        getHeaderWithRestoreAbility, 
+        setStateForSortView } from './../../actions/fileActions';
+
 import mockFileApi from '../../api/mockFileApi';
 
 class SideBarFilter extends React.Component {
@@ -27,14 +34,17 @@ class SideBarFilter extends React.Component {
             case 'allItem': 
                 this.props.getDatabaseFiles();
                 this.props.getHeaderWithDeleteAbility();
+                this.props.setStateForSortView(1);
                 return;
             case 'lastDay':
                this.props.getLastDayAccessedFiles();
                this.props.getHeaderWithDeleteAbility();
+               this.props.setStateForSortView(2);
                 return;
             case 'recicleBin':
                 this.props.getRecycleBinFiles();
                 this.props.getHeaderWithRestoreAbility();
+                this.props.setStateForSortView(3);
                 return;
             default:
                 return;    
@@ -63,7 +73,8 @@ function mapDispatchToProps(dispatch) {
         getLastDayAccessedFiles:()=>{dispatch(getLastDayAccessedFiles())},
         deselectAllFiles:()=>{dispatch(deselectAllFiles())},
         getHeaderWithDeleteAbility:()=>{dispatch(getHeaderWithDeleteAbility())},
-        getHeaderWithRestoreAbility:()=>{dispatch(getHeaderWithRestoreAbility())}
+        getHeaderWithRestoreAbility:()=>{dispatch(getHeaderWithRestoreAbility())},
+        setStateForSortView:(view)=>{dispatch(setStateForSortView(view))}
 
     };
 }

@@ -394,5 +394,15 @@ class DataBaseFiles {
       });
       return stringFiles;
     }
+
+    changeSharingOption(option, filesId)  {
+      for(let i=0;i<filesId.length;i++) {
+        for (let j=0;j<this.files.length;j++) {
+          if(this.files[j].guid === filesId[i]) {
+            this.files[j].sharing = option;
+          }
+        }
+    }
+  }
 }
 export default new DataBaseFiles();

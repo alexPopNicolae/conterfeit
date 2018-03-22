@@ -21,7 +21,20 @@ class ShareComponent extends React.Component {
     }
 
     handleOption(e) {
-        this.props.handleSelectedOption(e.target.id);
+        let option = e.target.id;
+        switch(option) {
+            case 'public':
+                this.props.handleSelectedOption(1);
+                return;
+            case 'shared':
+                this.props.handleSelectedOption(2);
+                return;
+            case 'private':
+                this.props.handleSelectedOption(3);
+                return;
+            default:
+                return;        
+        }
     }
 
     render() {
@@ -31,9 +44,9 @@ class ShareComponent extends React.Component {
             <span className="text">Share</span>
             {this.state.optionsVisible ? 
             <div className="share_options_container">
+                <div id="public" onClick={this.handleOption} className="option">Public</div>
                 <div id="shared" onClick={this.handleOption} className="option">Shared</div>
                 <div id="private" onClick={this.handleOption} className="option">Private</div>
-                <div id="public" onClick={this.handleOption} className="option">Public</div>
             </div>:null}
         </span>
         );

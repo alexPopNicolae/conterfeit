@@ -9,7 +9,11 @@ import { deselectAllFiles,
         removeAllSelectedFilesFromSelectionList,
         getStateActiveFile,
         deleteSelectedFiles,
-        restoreSelectedFiles } from './../../actions/fileActions';
+        restoreSelectedFiles,
+        changeSharingOption,
+        getLastDayAccessedFiles,
+        getRecycleBinFiles
+         } from './../../actions/fileActions';
 
 class ActionHeader extends React.Component {
     constructor() {
@@ -57,7 +61,24 @@ class ActionHeader extends React.Component {
     }
 
     handleSelectedShareOption(option) {
-        console.log("Ai ales optiunea: " + option);
+        this.props.changeSharingOption(option, this.props.selectedFiles);
+        this.props.deselectAllFile();
+        this.props.removeAllSelectedFilesFromSelectionList();
+        let view = this.props.sidebarView.view;
+        switch(view) {
+            case 1:
+                this.props.getDatabaseFiles();
+                return;
+            case 2:
+                this.props.getLastDayAccessedFiles();
+                return;
+            case 3: 
+               this.props.getRecycleBinFiles();
+               return;
+            default:
+                return;   
+        }
+
     }
 
 
@@ -136,6 +157,7 @@ class ActionHeader extends React.Component {
 }
 function mapStateToProps(state, ownProps) {
     return {
+        sidebarView:state.sidebarView,
         headerVisible: state.headerVisible,
         fileCount: state.fileCount,
         selectedFiles: state.selectedFiles,
@@ -148,7 +170,11 @@ function mapDispatchToProps(dispatch) {
         getStateActiveFile: () => dispatch(getStateActiveFile()),
         removeAllSelectedFilesFromSelectionList: () => dispatch(removeAllSelectedFilesFromSelectionList()),
         deleteSelectedFiles: (files) => dispatch(deleteSelectedFiles(files)),
-        restoreSelectedFiles:(files) => dispatch(restoreSelectedFiles(files))
+        restoreSelectedFiles:(files) => dispatch(restoreSelectedFiles(files)),
+        changeSharingOption:(option, files) => dispatch(changeSharingOption(option, files)),
+        getDatabaseFiles:()=>{dispatch(getDatabaseFiles())},
+        getLastDayAccessedFiles:()=>{dispatch(getLastDayAccessedFiles())},
+        getRecycleBinFiles:()=>{dispatch(getRecycleBinFiles())}
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ActionHeader);

@@ -49,3 +49,6 @@ export function restoreSelectedFiles(selectedFiles) {
 export function changeSharingOption(option, selectedFiles) {
     return {type:'CHANGE_SHARING_OPTION', option:option, files:selectedFiles};
 }
+export function setStateForSortView(view) {
+    return {type:'SET_STATE_FOR_SORT_VIEW', view:view};
+}

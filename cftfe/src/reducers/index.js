@@ -3,6 +3,7 @@ import files from './fileReducer';
 import fileCount from './fileCountReducer';
 import headerVisibility from './headerVisibileReducer';
 import selectedFiles from './selectedFilesReducer';
+import sidebarView from './sidebarViewReducer';
 import { combineReducers } from 'redux';
 
 const rootReducer = combineReducers({
@@ -10,7 +11,8 @@ const rootReducer = combineReducers({
     files,
     fileCount,
     headerVisibility,
-    selectedFiles
+    selectedFiles,
+    sidebarView
 });
 
 export default rootReducer;
