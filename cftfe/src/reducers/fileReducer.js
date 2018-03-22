@@ -1,4 +1,5 @@
 import mockApi from './../api/mockFileApi';
+import _ from 'lodash';
 
 export default function fileReducer(state = [], action) {
     switch(action.type) {
@@ -29,8 +30,10 @@ export default function fileReducer(state = [], action) {
                 transformedRow.id = item.guid;
                 transformedRow.name = item.name;
                 transformedRow.date = mockApi.formatDate(item.lastAccessedDate);
+                transformedRow.milisecondsTime = mockApi.getTimeFromDate(mockApi.formatDate(item.lastAccessedDate));
                 transformedRow.sharing = mockApi.getSharingType(item.sharing);
                 transformedRow.size = mockApi.formatFileSize(item.sizeBytes);
+                transformedRow.actualSize = item.sizeBytes;
                 transformedRow.isDeleted = item.isDeleted;
                 transformedRow.selected = false;
                 return transformedRow;  
@@ -44,8 +47,10 @@ export default function fileReducer(state = [], action) {
                 transformedRow.id = item.guid;
                 transformedRow.name = item.name;
                 transformedRow.date = mockApi.formatDate(item.lastAccessedDate);
+                transformedRow.milisecondsTime = mockApi.getTimeFromDate(mockApi.formatDate(item.lastAccessedDate));
                 transformedRow.sharing = mockApi.getSharingType(item.sharing);
                 transformedRow.size = mockApi.formatFileSize(item.sizeBytes);
+                transformedRow.actualSize = item.sizeBytes;
                 transformedRow.isDeleted = item.isDeleted;
                 transformedRow.selected = false;
                 return transformedRow;  
@@ -63,8 +68,10 @@ export default function fileReducer(state = [], action) {
                   transformedRow.id = item.guid;
                   transformedRow.name = item.name;
                   transformedRow.date = mockApi.formatDate(item.lastAccessedDate);
+                  transformedRow.milisecondsTime = mockApi.getTimeFromDate(mockApi.formatDate(item.lastAccessedDate));
                   transformedRow.sharing = mockApi.getSharingType(item.sharing);
                   transformedRow.size = mockApi.formatFileSize(item.sizeBytes);
+                  transformedRow.actualSize = item.sizeBytes;
                   transformedRow.isDeleted = item.isDeleted;
                   transformedRow.selected = false;
                   return transformedRow;  
@@ -82,8 +89,10 @@ export default function fileReducer(state = [], action) {
                 transformedRow.id = item.guid;
                 transformedRow.name = item.name;
                 transformedRow.date = mockApi.formatDate(item.lastAccessedDate);
+                transformedRow.milisecondsTime = mockApi.getTimeFromDate(mockApi.formatDate(item.lastAccessedDate));
                 transformedRow.sharing = mockApi.getSharingType(item.sharing);
                 transformedRow.size = mockApi.formatFileSize(item.sizeBytes);
+                transformedRow.actualSize = item.sizeBytes;
                 transformedRow.isDeleted = item.isDeleted;
                 transformedRow.selected = false;
                 return transformedRow;  
@@ -97,8 +106,10 @@ export default function fileReducer(state = [], action) {
                 transformedRow.id = item.guid;
                 transformedRow.name = item.name;
                 transformedRow.date = mockApi.formatDate(item.lastAccessedDate);
+                transformedRow.milisecondsTime = mockApi.getTimeFromDate(mockApi.formatDate(item.lastAccessedDate));
                 transformedRow.sharing = mockApi.getSharingType(item.sharing);
                 transformedRow.size = mockApi.formatFileSize(item.sizeBytes);
+                transformedRow.actualSize = item.sizeBytes;
                 transformedRow.isDeleted = item.isDeleted;
                 transformedRow.selected = false;
                 return transformedRow;  
@@ -112,14 +123,25 @@ export default function fileReducer(state = [], action) {
                 transformedRow.id = item.guid;
                 transformedRow.name = item.name;
                 transformedRow.date = mockApi.formatDate(item.lastAccessedDate);
+                transformedRow.milisecondsTime = mockApi.getTimeFromDate(mockApi.formatDate(item.lastAccessedDate));
                 transformedRow.sharing = mockApi.getSharingType(item.sharing);
                 transformedRow.size = mockApi.formatFileSize(item.sizeBytes);
+                transformedRow.actualSize = item.sizeBytes;
                 transformedRow.isDeleted = item.isDeleted;
                 transformedRow.selected = false;
                 return transformedRow;  
           });
             return keyTranformedFiles;
 
+        case 'SORT_BY_NAME_ASCENDENT':
+            let sortedByName = _.sortBy(state, 'name');
+            return sortedByName;
+        case 'SORT_BY_DATE_ASCENDENT':
+            let sortedByDate = _.sortBy(state, 'milisecondsTime');
+            return sortedByDate;
+        case 'SORT_BY_SIZE_ASCENDENT':
+            let sortedBySize = _.sortBy(state, 'actualSize');
+            return sortedBySize;
         default: 
             return state;    
     }

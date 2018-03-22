@@ -52,3 +52,24 @@ export function changeSharingOption(option, selectedFiles) {
 export function setStateForSortView(view) {
     return {type:'SET_STATE_FOR_SORT_VIEW', view:view};
 }
+export function sortByNameAscendent() {//reducer missing **
+    return {type:'SORT_BY_NAME_ASCENDENT'};
+}
+export function sortByNameDescendent() {//reducer missing
+    return {type:'SORT_BY_NAME_DESCENDENT'};
+}
+export function sortByDateAscendent() {//reducer missing **
+    return {type:'SORT_BY_DATE_ASCENDENT'};
+}
+export function sortByDateDescendent() {//reducer missing
+    return {type:'SORT_BY_DATE_DESCENDENT'};
+}
+export function sortBySizeAscendent() {//reducer missing **
+    return {type:'SORT_BY_SIZE_ASCENDENT'};
+}
+export function sortBySizeDescendent() {//reducer missing
+    return {type:'SORT_BY_SIZE_DESCENDENT'};
+}
+export function resetSortingButtonsOnNewPage() {//reducer missing
+    return {type:'RESET_SORTING_BUTTONS_ON_NEW_PAGE'};
+}
