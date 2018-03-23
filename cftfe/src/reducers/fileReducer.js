@@ -1,9 +1,10 @@
 import mockApi from './../api/mockFileApi';
 import _ from 'lodash';
+import * as types from './../actions/actionTypes';
 
 export default function fileReducer(state = [], action) {
     switch(action.type) {
-        case 'CREATE_FILE':
+        case types.CREATE_FILE:
             let newState = [...state];
             let fileOptions = {};
             fileOptions.name = action.fileName;
@@ -23,7 +24,7 @@ export default function fileReducer(state = [], action) {
             mockApi.addFile(fileForDB);
             newState.unshift(fileOptions);
             return newState;
-        case 'DELETE_SELECTED_FILES':
+        case types.DELETE_SELECTED_FILES:
             let filesWithoutDeleted = mockApi.deleteSelectedFiles(action.files);
             let transformetFileWithoutDeletes = filesWithoutDeleted.map((item, index) => {
                 let transformedRow = {};
@@ -40,7 +41,7 @@ export default function fileReducer(state = [], action) {
           });
           return transformetFileWithoutDeletes;
 
-        case 'RESTORE_SELECTED_FILES':
+        case types.RESTORE_SELECTED_FILES:
             let filesWithoutRestored = mockApi.restoreSelectedFiles(action.files);
             let transformedFilesWithoutRestored = filesWithoutRestored.map((item, index) => {
                 let transformedRow = {};
@@ -57,11 +58,11 @@ export default function fileReducer(state = [], action) {
           });
           return transformedFilesWithoutRestored;
 
-        case 'CHANGE_SHARING_OPTION':
+        case types.CHANGE_SHARING_OPTION:
             let filesAfterShare = mockApi.changeSharingOption(action.option, action.files);  
             return state.map((item)=>{return item});
 
-         case 'GET_DATABASE_FILES':
+         case types.GET_DATABASE_FILES:
             let data = mockApi.getAllFiles();
             let dataForRow = data.map((item, index) => {
                   let transformedRow = {};
@@ -78,11 +79,11 @@ export default function fileReducer(state = [], action) {
             });
             return dataForRow;
 
-            case 'GET_STATE_ACTIVE_FILES':
+            case types.GET_STATE_ACTIVE_FILES:
                 let sameStateUnselected = state.map((item)=>{return item});
                 return sameStateUnselected;
 
-            case 'GET_LAST_DAY_ACCESED_FILES':
+            case types.GET_LAST_DAY_ACCESED_FILES:
             let lastDayAccesed = mockApi.getAccesedLastDay();
             let lastDayTransformed = lastDayAccesed.map((item, index) => {
                 let transformedRow = {};
@@ -99,7 +100,7 @@ export default function fileReducer(state = [], action) {
           });
           return lastDayTransformed;
 
-           case 'GET_RECYCLE_BIN_FILES': 
+           case types.GET_RECYCLE_BIN_FILES: 
             let deletedFiles = mockApi.getAllDeletedFiles();
             let tranformedFiles = deletedFiles.map((item, index) => {
                 let transformedRow = {};
@@ -116,7 +117,7 @@ export default function fileReducer(state = [], action) {
           });
             return tranformedFiles;
 
-        case 'SORT_FILES_BASED_ON_KEYWORD':
+        case types.SORT_FILES_BASED_ON_KEYWORD:
             let keyWordFiles = mockApi.getFilesBasedOnKeyWord(action.keyword);
             let keyTranformedFiles = keyWordFiles.map((item, index) => {
                 let transformedRow = {};
@@ -133,13 +134,13 @@ export default function fileReducer(state = [], action) {
           });
             return keyTranformedFiles;
 
-        case 'SORT_BY_NAME_ASCENDENT':
+        case types.SORT_BY_NAME_ASCENDENT:
             let sortedByName = _.sortBy(state, 'name');
             return sortedByName;
-        case 'SORT_BY_DATE_ASCENDENT':
+        case types.SORT_BY_DATE_ASCENDENT:
             let sortedByDate = _.sortBy(state, 'milisecondsTime');
             return sortedByDate;
-        case 'SORT_BY_SIZE_ASCENDENT':
+        case types.SORT_BY_SIZE_ASCENDENT:
             let sortedBySize = _.sortBy(state, 'actualSize');
             return sortedBySize;
         default: 

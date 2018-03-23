@@ -2,6 +2,7 @@ import React from 'react';
 import './MainContent.css';
 import ActionHeader from '../../common/ActionHeader';
 import FilesTable from '../../common/FilesTable';
+import UsersArea from './../../common/UsersArea';
 import AddFileModal from '../../common/AddFileModal';
 import fileApi from './../../api/mockFileApi';
 
@@ -49,6 +50,7 @@ class MainContent extends React.Component {
                     itemSelected={this.state.itemSelected}
                     clearSelectedFiles={this.clearSelectedFiles} />
                <div className="container">
+                <UsersArea />
                 <h1>Files</h1>
                 <FilesTable itemStatus={this.getItemStatus}/>
                 <AddFileModal closeModal={this.toggleModal} visible={this.state.modalVisible}/>
