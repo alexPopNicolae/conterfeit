@@ -81,9 +81,14 @@ export function loadUsersSucces(users) {
     return {type:types.LOAD_USERS_SUCCES, users:users};
 }
 
-//redux thubk function for handling asynchronus call - redux thunk action creator
+export function startLoadingScreen()  {
+    return {type:types.START_LOADING_SCREEN};
+}
+
+//redux thunk function for handling asynchronus call - redux thunk action creator=                                                                              
 export function loadUsers() {
     return function(dispatch) {
+        dispatch(startLoadingScreen());
         return usersApi.getAllUsers().then(users => {
             dispatch(loadUsersSucces(users))
         }).catch(error=>{
