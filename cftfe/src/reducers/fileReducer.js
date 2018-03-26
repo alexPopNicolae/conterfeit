@@ -24,22 +24,6 @@ export default function fileReducer(state = [], action) {
             mockApi.addFile(fileForDB);
             newState.unshift(fileOptions);
             return newState;
-        case types.DELETE_SELECTED_FILES:
-            let filesWithoutDeleted = mockApi.deleteSelectedFiles(action.files);
-            let transformetFileWithoutDeletes = filesWithoutDeleted.map((item, index) => {
-                let transformedRow = {};
-                transformedRow.id = item.guid;
-                transformedRow.name = item.name;
-                transformedRow.date = mockApi.formatDate(item.lastAccessedDate);
-                transformedRow.milisecondsTime = mockApi.getTimeFromDate(mockApi.formatDate(item.lastAccessedDate));
-                transformedRow.sharing = mockApi.getSharingType(item.sharing);
-                transformedRow.size = mockApi.formatFileSize(item.sizeBytes);
-                transformedRow.actualSize = item.sizeBytes;
-                transformedRow.isDeleted = item.isDeleted;
-                transformedRow.selected = false;
-                return transformedRow;  
-          });
-          return transformetFileWithoutDeletes;
 
         case types.RESTORE_SELECTED_FILES:
             let filesWithoutRestored = mockApi.restoreSelectedFiles(action.files);
@@ -63,7 +47,7 @@ export default function fileReducer(state = [], action) {
             return state.map((item)=>{return item});
 
          case types.GET_DATABASE_FILES:
-            let data = mockApi.getAllFiles();
+            let data = action.files;
             let dataForRow = data.map((item, index) => {
                   let transformedRow = {};
                   transformedRow.id = item.guid;

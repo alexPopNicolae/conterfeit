@@ -1,11 +1,12 @@
 import * as types from './actionTypes';
 import usersApi from './../api/mockUsersApi';
+import mockApi from './../api/mockFileApi';
 
 export function createFile(fileName) {
     return {type:types.CREATE_FILE, fileName:fileName};
 }
-export function getDatabaseFiles() {
-    return {type:types.GET_DATABASE_FILES};
+export function getDatabaseFiles(files) {
+    return {type:types.GET_DATABASE_FILES, files:files};
 }
 export function getStateActiveFile() {
     return {type:types.GET_STATE_ACTIVE_FILES};
@@ -25,10 +26,10 @@ export function downCountSelectedFile() {
 export function deselectAllFiles() {
     return {type:types.DESELECT_ALL_FILES};
 }
-export function getHeaderWithDeleteAbility() {//aici trebuie sa lucrez
+export function getHeaderWithDeleteAbility() {
     return {type:types.GET_HEADER_WITH_DELETE_ABILITY};
 }
-export function getHeaderWithRestoreAbility() {//aici trebuie sa lucrez
+export function getHeaderWithRestoreAbility() {
     return {type:types.GET_HEADER_WITH_RESTORE_ABILITY};
 }
 export function addFileToSelectionList(fileId) {
@@ -43,9 +44,7 @@ export function removeAllSelectedFilesFromSelectionList() {
 export function sortFilesBasedOnKeyWord(keyword) {
     return {type:types.SORT_FILES_BASED_ON_KEYWORD, keyword:keyword};
 }
-export function deleteSelectedFiles(selectedFiles) {
-    return {type:types.DELETE_SELECTED_FILES, files:selectedFiles};
-}
+
 export function restoreSelectedFiles(selectedFiles) {
     return {type:types.RESTORE_SELECTED_FILES, files:selectedFiles};
 }
@@ -96,3 +95,39 @@ export function loadUsers() {
         })
     }
 }
+
+export function loadDatabaseFiles() {
+    return function(dispatch) {
+        dispatch(startLoadingScreen());
+        return mockApi.getAllFiles().then(files => {
+            dispatch(getDatabaseFiles(files));
+        }).catch(error => {
+            throw(error);
+        });
+    }
+}
+
+export function loadDeletedAndSelectedFiles(selectedFiles) {
+    return function(dispatch) {
+        dispatch(startLoadingScreen());
+        return mockApi.deleteSelectedFiles(selectedFiles).then(files=>{
+            dispatch(getDatabaseFiles(files));
+        }).catch(error => {
+            throw(error);
+        })
+    }
+}
+
+//thunk for loading files database files
+//1. primul lucru de facut este sa schimbam mockApi 
+//astfe incat sa returneze un promise cu delay - done
+
+//2. al doilea lucru este sa scoatem api-ul din reducere si sa le punem
+//in thunk action creators
+
+//3. al treilea lucru este sa schimbam action creaturile
+
+
+//thunk for loading recyble bin files
+//thunk for loading lastday accessed files
+

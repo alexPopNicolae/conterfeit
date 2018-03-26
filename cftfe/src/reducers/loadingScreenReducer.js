@@ -7,7 +7,10 @@ export default function loadingScreenReducer(state=0, action) {
         return state;
         case types.LOAD_USERS_SUCCES:
             state = state - 1;
-        return state;    
+        return state;   
+        case types.GET_DATABASE_FILES:
+            state = state - 1;
+            return state; 
         default:
             return state;
     }

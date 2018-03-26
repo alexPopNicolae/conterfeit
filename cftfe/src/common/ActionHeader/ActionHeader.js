@@ -8,11 +8,11 @@ import { deselectAllFiles,
         getDatabaseFiles,
         removeAllSelectedFilesFromSelectionList,
         getStateActiveFile,
-        deleteSelectedFiles,
         restoreSelectedFiles,
         changeSharingOption,
         getLastDayAccessedFiles,
-        getRecycleBinFiles
+        getRecycleBinFiles,
+        loadDeletedAndSelectedFiles
          } from './../../actions/fileActions';
 
 class ActionHeader extends React.Component {
@@ -49,7 +49,7 @@ class ActionHeader extends React.Component {
     }
 
     deleteSelectedFiles() {
-        this.props.deleteSelectedFiles(this.props.selectedFiles);
+        this.props.loadDeletedAndSelectedFiles(this.props.selectedFiles);
         this.props.removeAllSelectedFilesFromSelectionList();
         this.props.getStateActiveFile();
     }
@@ -169,7 +169,7 @@ function mapDispatchToProps(dispatch) {
         deselectAllFile: () => dispatch(deselectAllFiles()),
         getStateActiveFile: () => dispatch(getStateActiveFile()),
         removeAllSelectedFilesFromSelectionList: () => dispatch(removeAllSelectedFilesFromSelectionList()),
-        deleteSelectedFiles: (files) => dispatch(deleteSelectedFiles(files)),
+        loadDeletedAndSelectedFiles: (files) => dispatch(loadDeletedAndSelectedFiles(files)),
         restoreSelectedFiles:(files) => dispatch(restoreSelectedFiles(files)),
         changeSharingOption:(option, files) => dispatch(changeSharingOption(option, files)),
         getDatabaseFiles:()=>{dispatch(getDatabaseFiles())},

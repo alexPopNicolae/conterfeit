@@ -50,7 +50,6 @@ class MainContent extends React.Component {
                     itemSelected={this.state.itemSelected}
                     clearSelectedFiles={this.clearSelectedFiles} />
                <div className="container">
-                <UsersArea />
                 <h1>Files</h1>
                 <FilesTable itemStatus={this.getItemStatus}/>
                 <AddFileModal closeModal={this.toggleModal} visible={this.state.modalVisible}/>

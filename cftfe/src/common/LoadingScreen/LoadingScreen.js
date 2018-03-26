@@ -10,7 +10,7 @@ class LoadingScreen extends React.Component {
         return(
             <div className="loading_background">
                 <div className="loading_circle_container">
-                    <div class="circle"></div>
+                    <div className="circle"></div>
                 </div>
             </div>
         );

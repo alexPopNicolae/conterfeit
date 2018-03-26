@@ -8,7 +8,8 @@ import { getDatabaseFiles,
         deselectAllFiles, 
         getHeaderWithDeleteAbility, 
         getHeaderWithRestoreAbility, 
-        setStateForSortView } from './../../actions/fileActions';
+        setStateForSortView,
+        loadDatabaseFiles } from './../../actions/fileActions';
 
 import mockFileApi from '../../api/mockFileApi';
 
@@ -32,7 +33,7 @@ class SideBarFilter extends React.Component {
         this.props.deselectAllFiles();
         switch(e.target.id) {
             case 'allItem': 
-                this.props.getDatabaseFiles();
+                this.props.loadDatabaseFiles();
                 this.props.getHeaderWithDeleteAbility();
                 this.props.setStateForSortView(1);
                 return;
@@ -74,7 +75,8 @@ function mapDispatchToProps(dispatch) {
         deselectAllFiles:()=>{dispatch(deselectAllFiles())},
         getHeaderWithDeleteAbility:()=>{dispatch(getHeaderWithDeleteAbility())},
         getHeaderWithRestoreAbility:()=>{dispatch(getHeaderWithRestoreAbility())},
-        setStateForSortView:(view)=>{dispatch(setStateForSortView(view))}
+        setStateForSortView:(view)=>{dispatch(setStateForSortView(view))},
+        loadDatabaseFiles:()=>{dispatch(loadDatabaseFiles())}
 
     };
 }

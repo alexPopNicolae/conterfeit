@@ -6,7 +6,12 @@ import _ from 'lodash';
 import './FilesTable.css';
 import { connect } from 'react-redux';
 import { getDatabaseFiles } from  './../../actions/fileActions';
-import { upCountSelectedFile, downCountSelectedFile, addFileToSelectionList, removeFileFromSelectionList } from './../../actions/fileActions';
+import { upCountSelectedFile,
+        downCountSelectedFile,
+        addFileToSelectionList,
+        removeFileFromSelectionList,
+        loadDatabaseFiles
+         } from './../../actions/fileActions';
 
 class FilesTable extends React.Component {
     constructor() {
@@ -31,7 +36,7 @@ class FilesTable extends React.Component {
     }
 
     componentWillMount() {
-        this.props.getDatabaseFiles();
+        this.props.loadDatabaseFiles();
     }
 
     render() {
@@ -65,7 +70,8 @@ function mapDispatchToProps(dispatch) {
         downCountSelectedFile:() =>{dispatch(downCountSelectedFile())},
         getDatabaseFiles:()=>{dispatch(getDatabaseFiles())},
         addFileToSelectionList:(fileId)=>{dispatch(addFileToSelectionList(fileId))},
-        removeFileFromSelectionList:(fileId)=>{dispatch(removeFileFromSelectionList(fileId))}
+        removeFileFromSelectionList:(fileId)=>{dispatch(removeFileFromSelectionList(fileId))},
+        loadDatabaseFiles:()=>{dispatch(loadDatabaseFiles())}
     }
 }
 

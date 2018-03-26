@@ -1,3 +1,5 @@
+import delay from './delay';
+
 class DataBaseFiles {
     constructor() {
         this.files = [
@@ -361,8 +363,15 @@ class DataBaseFiles {
         let activeFiles = this.files.filter((file)=>{
           return file.isDeleted === false;
         });
-        return activeFiles;
+
+        return new Promise((resolve, reject) => {
+          setTimeout(()=>{
+              resolve(Object.assign([], activeFiles));
+          }, delay);
+        });
     }
+
+    
     getAllDeletedFiles() {
       let deletedFiles = this.files.filter((file)=>{
         return file.isDeleted === true;
