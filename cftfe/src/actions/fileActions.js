@@ -1,6 +1,7 @@
 import * as types from './actionTypes';
 import usersApi from './../api/mockUsersApi';
 import mockApi from './../api/mockFileApi';
+import toastr from 'toastr';
 
 export function createFile(fileName) {
     return {type:types.CREATE_FILE, fileName:fileName};
@@ -14,7 +15,7 @@ export function getStateActiveFile() {
 export function getRecycleBinFiles() {
     return {type:types.GET_RECYCLE_BIN_FILES};
 }
-export function getLastDayAccessedFiles() {
+export function getLastDayAccessedFiles(files) {
     return {type:types.GET_LAST_DAY_ACCESED_FILES};
 }
 export function upCountSelectedFile() {
@@ -117,6 +118,50 @@ export function loadDeletedAndSelectedFiles(selectedFiles) {
         })
     }
 }
+
+export function loadLastDayAccessedFiles() {
+    return function(dispatch) {
+        dispatch(startLoadingScreen());
+        return mockApi.getAccesedLastDay().then(files => {
+            dispatch(getDatabaseFiles(files));
+        }).catch(error => {
+            throw(error);
+        });
+    }
+}
+
+export function loadAllDeletedFiles() {
+    return function(dispatch) {
+        dispatch(startLoadingScreen());
+        return mockApi.getAllDeletedFiles().then(files => {
+            dispatch(getDatabaseFiles(files))
+        })
+        .catch(error => {throw(error)});
+    }
+}
+
+export function loadDeletedFilesAfterRestore(selectedFiles) {
+    return function(dispatch) {
+        dispatch(startLoadingScreen());
+        return mockApi.restoreSelectedFiles(selectedFiles).then(files => {
+            dispatch(getDatabaseFiles(files));
+        })
+        .catch(error => {
+            throw(error);
+        });
+    }
+}
+
+export function addNewFileToDatabase(fileName) {
+    return function(dispatch) {
+        return mockApi.addFile(fileName).then(fileName=>{
+            dispatch(createFile(fileName));
+        }).catch(error=> {
+            throw(error);
+        })
+    }
+}
+
 
 //thunk for loading files database files
 //1. primul lucru de facut este sa schimbam mockApi 

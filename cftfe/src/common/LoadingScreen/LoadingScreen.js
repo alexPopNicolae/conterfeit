@@ -12,6 +12,7 @@ class LoadingScreen extends React.Component {
                 <div className="loading_circle_container">
                     <div className="circle"></div>
                 </div>
+                <p>Loading...</p>
             </div>
         );
     }

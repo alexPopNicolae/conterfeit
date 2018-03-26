@@ -2,8 +2,9 @@ import React from 'react';
 import Icon from 'react-fontawesome';
 import './AddFileModal.css';
 import { connect } from 'react-redux';
-import  { createFile, getDatabaseFiles }  from './../../actions/fileActions';
+import  { createFile, loadDatabaseFiles, addNewFileToDatabase }  from './../../actions/fileActions';
 import { bindActionCreators } from 'redux';
+import toastr from 'toastr';
 
 class AddFileModal extends React.Component {
     constructor() {
@@ -42,12 +43,18 @@ class AddFileModal extends React.Component {
     }
 
     saveEnteredFile() {
-        this.props.createFile(this.state.fileName);
         this.setState({
             fileName:''
         });
         this.props.closeModal();
-        this.props.getDatabaseFiles();
+        if(this.state.fileName.length > 0) {
+            this.props.addNewFileToDatabase(this.state.fileName);
+            this.props.loadDatabaseFiles();
+            toastr.success(this.state.fileName + " folder added to OneDrive");
+        }else {
+            toastr.error("The filename must be at least 1 character long!");
+        }
+        
     }
 
     render () {
@@ -80,7 +87,8 @@ function mapsStateToProps(state, ownProps) {
 function mapDispatchToProps(dispatch) {
     return {
         createFile:fileName => dispatch(createFile(fileName)),
-        getDatabaseFiles:()=>{dispatch(getDatabaseFiles())}
+        loadDatabaseFiles:()=>{dispatch(loadDatabaseFiles())},
+        addNewFileToDatabase:(fileName)=>{dispatch(addNewFileToDatabase(fileName))}
     }
 }
 

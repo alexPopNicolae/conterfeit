@@ -9,7 +9,9 @@ import { getDatabaseFiles,
         getHeaderWithDeleteAbility, 
         getHeaderWithRestoreAbility, 
         setStateForSortView,
-        loadDatabaseFiles } from './../../actions/fileActions';
+        loadDatabaseFiles,
+        loadLastDayAccessedFiles,
+        loadAllDeletedFiles } from './../../actions/fileActions';
 
 import mockFileApi from '../../api/mockFileApi';
 
@@ -38,12 +40,12 @@ class SideBarFilter extends React.Component {
                 this.props.setStateForSortView(1);
                 return;
             case 'lastDay':
-               this.props.getLastDayAccessedFiles();
+               this.props.loadLastDayAccessedFiles();
                this.props.getHeaderWithDeleteAbility();
                this.props.setStateForSortView(2);
                 return;
             case 'recicleBin':
-                this.props.getRecycleBinFiles();
+                this.props.loadAllDeletedFiles();
                 this.props.getHeaderWithRestoreAbility();
                 this.props.setStateForSortView(3);
                 return;
@@ -76,7 +78,9 @@ function mapDispatchToProps(dispatch) {
         getHeaderWithDeleteAbility:()=>{dispatch(getHeaderWithDeleteAbility())},
         getHeaderWithRestoreAbility:()=>{dispatch(getHeaderWithRestoreAbility())},
         setStateForSortView:(view)=>{dispatch(setStateForSortView(view))},
-        loadDatabaseFiles:()=>{dispatch(loadDatabaseFiles())}
+        loadDatabaseFiles:()=>{dispatch(loadDatabaseFiles())},
+        loadLastDayAccessedFiles:()=>{dispatch(loadLastDayAccessedFiles())},
+        loadAllDeletedFiles:()=>{dispatch(loadAllDeletedFiles())}
 
     };
 }

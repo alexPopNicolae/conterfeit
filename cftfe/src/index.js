@@ -9,6 +9,7 @@ import { createStore, applyMiddleware  } from 'redux';
 import thunk from 'redux-thunk';
 import rootReducer from './reducers';
 import Store from './store.js';
+import './../node_modules/toastr/build/toastr.min.css';
 
 const store = createStore(
     rootReducer,
