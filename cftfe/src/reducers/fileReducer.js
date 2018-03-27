@@ -12,16 +12,6 @@ export default function fileReducer(state = [], action) {
             fileOptions.date = '30 Sep 2016';
             fileOptions.sharing = 1;
             fileOptions.selected = false;
-
-            let fileForDB = {};
-            let date = new Date();
-            fileForDB.guid = date.getTime();  
-            fileForDB.isDeleted = false;
-            fileForDB.sizeBytes = 91038671;
-            fileForDB.name = action.fileName; 
-            fileForDB.sharing = 2;
-            fileForDB.lastAccessedDate = "2018-03-09T03:27:50 -02:00";
-            mockApi.addFile(fileForDB);
             newState.unshift(fileOptions);
             return newState;
 

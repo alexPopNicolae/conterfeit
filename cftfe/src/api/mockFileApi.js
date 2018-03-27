@@ -355,8 +355,27 @@ class DataBaseFiles {
         return this.sharingTypes[item-1];
     }
 
-    addFile(file) {
-        this.files.unshift(file);
+    addFile(fileName) {
+
+        return new Promise((resolve, reject) => {
+          const minFileNameLength = 1;
+          if(fileName.length < minFileNameLength) {
+            reject(`Denumirea fisierului trebuie sa aiba cel putin ${minFileNameLength} caractere!`);
+            return;
+          }
+          let fileForDB = {};
+          let date = new Date();
+          fileForDB.guid = date.getTime();  
+          fileForDB.isDeleted = false;
+          fileForDB.sizeBytes = 91038671;
+          fileForDB.name = fileName; 
+          fileForDB.sharing = 2;
+          fileForDB.lastAccessedDate = "2018-03-09T03:27:50 -02:00";
+          this.files.unshift(fileForDB);
+          resolve(fileName);
+
+        });
+      
     }
 
     getAllFiles() {
@@ -376,7 +395,12 @@ class DataBaseFiles {
       let deletedFiles = this.files.filter((file)=>{
         return file.isDeleted === true;
       });
-      return deletedFiles;
+
+      return new Promise((resolve, reject)=> {
+          setTimeout(()=>{
+            resolve(Object.assign([], deletedFiles));
+          }, delay);
+      });
     }
 
     getAccesedLastDay() {
@@ -385,7 +409,12 @@ class DataBaseFiles {
           let day = date.split('T')[0].split('-');
           if(day[0]==='2018' && day[1]==='03' && day[2]==='09') return true;
         });
-        return lastDayAccesed;
+
+        return new Promise((resolve, reject) => {
+          setTimeout(()=>{
+            resolve(Object.assign([],lastDayAccesed));
+          }, delay);
+        });
     }
 
     deleteSelectedFiles(filesId) {
@@ -409,8 +438,16 @@ class DataBaseFiles {
           }
         }
       }
-      let visibleFiles = this.getAllDeletedFiles();   
-      return visibleFiles;
+      let visibleFiles = this.files.filter((file)=>{
+        return file.isDeleted === true;
+      });
+
+      return new Promise((resolve, reject) => {
+          setTimeout(()=>{
+            resolve(Object.assign([], visibleFiles));
+          }, delay);
+      });
+      
     }
 
     getFilesBasedOnKeyWord(keyword) {

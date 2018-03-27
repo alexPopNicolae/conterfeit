@@ -3,6 +3,7 @@ import './ActionHeader.css';
 import Icon from 'react-fontawesome';
 import ShareComponent from './../ShareComponent';
 import { connect } from 'react-redux';
+import toastr from 'toastr';
 import { bindActionCreators } from 'redux';
 import { deselectAllFiles,
         getDatabaseFiles,
@@ -12,8 +13,10 @@ import { deselectAllFiles,
         changeSharingOption,
         getLastDayAccessedFiles,
         getRecycleBinFiles,
-        loadDeletedAndSelectedFiles
+        loadDeletedAndSelectedFiles,
+        loadDeletedFilesAfterRestore
          } from './../../actions/fileActions';
+
 
 class ActionHeader extends React.Component {
     constructor() {
@@ -49,15 +52,23 @@ class ActionHeader extends React.Component {
     }
 
     deleteSelectedFiles() {
+        if(this.props.selectedFiles.length === 1) {
+            toastr.success("Deleted selected file");
+        } else {
+            toastr.success("Deleted selected files");
+        }
         this.props.loadDeletedAndSelectedFiles(this.props.selectedFiles);
         this.props.removeAllSelectedFilesFromSelectionList();
         this.props.getStateActiveFile();
+        this.deselectAllFiles();
     }
 
     restoreSelectedFiles() {
-        this.props.restoreSelectedFiles(this.props.selectedFiles);
+        toastr.success('Restored selected files!');
+        this.props.loadDeletedFilesAfterRestore(this.props.selectedFiles);
         this.props.removeAllSelectedFilesFromSelectionList();
         this.props.getStateActiveFile();
+        this.deselectAllFiles();
     }
 
     handleSelectedShareOption(option) {
@@ -174,7 +185,8 @@ function mapDispatchToProps(dispatch) {
         changeSharingOption:(option, files) => dispatch(changeSharingOption(option, files)),
         getDatabaseFiles:()=>{dispatch(getDatabaseFiles())},
         getLastDayAccessedFiles:()=>{dispatch(getLastDayAccessedFiles())},
-        getRecycleBinFiles:()=>{dispatch(getRecycleBinFiles())}
+        getRecycleBinFiles:()=>{dispatch(getRecycleBinFiles())},
+        loadDeletedFilesAfterRestore:(selectedFiles)=>{dispatch(loadDeletedFilesAfterRestore(selectedFiles))}
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ActionHeader);
