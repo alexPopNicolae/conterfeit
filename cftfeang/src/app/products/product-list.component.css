@@ -1,0 +1,11 @@
+.product-list {
+    width: 70%;
+    margin: 0 auto;
+}
+.product_image {
+    width: 100px;
+    height: auto;
+}
+table td div {
+        min-height: 60px;
+    }

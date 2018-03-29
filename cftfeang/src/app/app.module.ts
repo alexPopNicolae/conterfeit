@@ -4,19 +4,20 @@ import { FormsModule } from '@angular/forms';
 
 
 import { AppComponent } from './app.component';
-import { HeroesComponent } from './../common/heroes/heroes.component';
-
+import { ProductListComponent } from './products/product-list.component';
+import { ConvertToSpaces } from './shared/convert-to-spaces.pipe';
 
 @NgModule({
-  declarations: [
+  declarations: [//aici vin componentele
     AppComponent,
-    HeroesComponent
+    ProductListComponent,
+    ConvertToSpaces
   ],
-  imports: [
+  imports: [//aici vin importurile de librarii
     BrowserModule,
     FormsModule
   ],
-  providers: [],
+  providers: [],//aici vin serviciile
   bootstrap: [AppComponent]
 })
 export class AppModule { }
