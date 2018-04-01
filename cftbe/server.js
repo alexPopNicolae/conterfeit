@@ -58,10 +58,41 @@ var products = [
     }
 ];
 
+var users = [
+    {
+        userId:1,
+        userName:'Pop Nicolae-Alexandru',
+        userEmail:'alexpop@gmail.com',
+        description:'cel mai smecher baiat'
+    },
+    {
+        userId:2,
+        userName:'Ioana Nicoleta Pop',
+        userEmail:'ioana_haja@gmail.com',
+        description:'ce mai tare fata'
+    },
+    {
+        userId:3,
+        userName:'Mama',
+        userEmail:'mama@gmail.com',
+        description:'cel mai tare din parcate'
+    },
+    {
+        userId:4,
+        userName:'Tata',
+        userEmail:'tata@gmail.com',
+        description:'cel mai tare din parcare cand parcarea era goala'
+    }
+];
+
 app.get('/products', function(req, res) {
     setTimeout(()=>{
         res.json(products);
-    }, 5000)
+    }, 1000)
+});
+
+app.get('/users', function(req, res) {
+    res.json(users);
 });
 
 app.listen(PORT);
