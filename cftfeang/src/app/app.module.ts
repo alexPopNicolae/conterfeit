@@ -11,6 +11,7 @@ import { StarComponent } from './shared/star.component';
 import { LoadingOverlay } from './shared/loading-overlay.component';
 import { HttpClient } from 'selenium-webdriver/http';
 import { UsersList } from './users/users-list.component';
+import { ProductDetail } from './productdetail/product-detail.component';
 
 @NgModule({
   declarations: [//aici vin componentele
@@ -19,7 +20,8 @@ import { UsersList } from './users/users-list.component';
     ConvertToSpaces, 
     StarComponent,
     LoadingOverlay,
-    UsersList
+    UsersList,
+    ProductDetail
   ],
   imports: [//aici vin importurile de librarii
     BrowserModule,
